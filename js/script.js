@@ -237,10 +237,6 @@ function initCounterAnimations() {
 /**
  * --------------------------------------------------------------------------
  * 7. SYLLABUS INTERACTIVE EXPLORER & JS-BASE CLIENT AUTHENTICATION
- * 
- * Single Partner Credentials:
- * ID: stemaero123
- * Password: StemAero1407.
  * --------------------------------------------------------------------------
  */
 const SYLLABUS_AUTH = {
@@ -519,7 +515,7 @@ function initSyllabusAuthPortal() {
       if (noticeText) {
         noticeText.innerHTML = `
           <svg style="display: inline-block; vertical-align: middle; margin-right: 6px; width: 16px; height: 16px; color: #10B981;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <strong style="color: #065F46;">Partner Session Active (ID: stemaero123):</strong> You have full verified access to the 10-year progressive robotics &amp; AI syllabus and the official curriculum documentation embedded below.
+          <strong style="color: #065F46;">Partner Session Active:</strong> You have full verified access to the 10-year progressive robotics &amp; AI syllabus and the official curriculum documentation embedded below.
         `;
         if (noticeText.parentElement) {
           noticeText.parentElement.style.background = '#ECFDF5';
@@ -534,7 +530,7 @@ function initSyllabusAuthPortal() {
       if (noticeText) {
         noticeText.innerHTML = `
           <svg style="display: inline-block; vertical-align: middle; margin-right: 6px; width: 16px; height: 16px; color: var(--royal-blue);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          <strong>Curriculum Protection Notice:</strong> In accordance with STEM AERO policies, complete project details and lesson plans are secured for authorized partner schools. Enter ID <code>stemaero123</code> &amp; password <code>StemAero1407.</code> above to unlock the complete syllabus online.
+          <strong>Curriculum Protection Notice:</strong> In accordance with STEM AERO policies, complete project details and lesson plans are secured for authorized partner schools. Enter your partner credentials above to unlock the complete syllabus online.
         `;
         if (noticeText.parentElement) {
           noticeText.parentElement.style.background = 'var(--bg-subtle)';
