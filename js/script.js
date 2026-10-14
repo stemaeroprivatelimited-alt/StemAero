@@ -98,18 +98,27 @@ function initMobileMenu() {
   const drawer = document.querySelector('.mobile-menu-drawer');
   if (!toggleBtn || !drawer) return;
 
-  toggleBtn.addEventListener('click', () => {
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    toggleBtn.classList.remove('active');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    toggleBtn.classList.add('active');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     const isOpen = drawer.classList.contains('open');
     if (isOpen) {
-      drawer.classList.remove('open');
-      toggleBtn.classList.remove('active');
-      toggleBtn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+      closeDrawer();
     } else {
-      drawer.classList.add('open');
-      toggleBtn.classList.add('active');
-      toggleBtn.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
+      openDrawer();
     }
   });
 
@@ -117,11 +126,22 @@ function initMobileMenu() {
   const drawerLinks = drawer.querySelectorAll('a');
   drawerLinks.forEach(link => {
     link.addEventListener('click', () => {
-      drawer.classList.remove('open');
-      toggleBtn.classList.remove('active');
-      toggleBtn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+      closeDrawer();
     });
+  });
+
+  // Close when clicking outside drawer
+  document.addEventListener('click', (e) => {
+    if (drawer.classList.contains('open') && !drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+      closeDrawer();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer.classList.contains('open')) {
+      closeDrawer();
+    }
   });
 }
 
@@ -360,9 +380,13 @@ function initSyllabusPage() {
 
   // Render active class details
   renderClassContent(activeClassId);
+  const activePill = pillsContainer.querySelector('.syllabus-pill-btn.active');
+  if (activePill) {
+    setTimeout(() => activePill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }), 100);
+  }
 
   // Function to switch active class
-  function selectClass(classId) {
+  function selectClass(classId, shouldScroll = true) {
     activeClassId = classId;
     window.location.hash = classId;
 
@@ -372,6 +396,9 @@ function initSyllabusPage() {
       const match = pill.getAttribute('data-class-id') === classId;
       pill.classList.toggle('active', match);
       pill.setAttribute('aria-selected', match ? 'true' : 'false');
+      if (match && shouldScroll) {
+        pill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
     });
 
     renderClassContent(classId);
